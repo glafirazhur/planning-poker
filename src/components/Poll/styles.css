@@ -1,0 +1,4 @@
+.poll {
+  display: flex;
+  flex-wrap: wrap;
+}
