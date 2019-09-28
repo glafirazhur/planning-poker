@@ -1,14 +1,14 @@
 const mongoose = require('mongoose');
 
-const { Schema } = mongoose;
-
-const voteSchema = Schema({
+const voteSchema = new mongoose.Schema({
   user: {
-    type: Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
     required: true,
   },
   poll: {
-    type: Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Poll',
     required: true,
   },
   voteValue: {
