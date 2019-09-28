@@ -1,3 +1,4 @@
+import 'dotenv/config';
 // Models
 import User from './models/user.model';
 import UserStory from './models/userstory.model';
@@ -17,7 +18,7 @@ const PORT = 4000;
 app.use(cors());
 app.use(bodyParser.json());
 
-const dbRoute = 'mongodb+srv://admin:admin12345r@ppcluster-dtinz.mongodb.net/test?retryWrites=true&w=majority';
+const dbRoute = process.env.CONNECTION_STRING;
 mongoose.connect(dbRoute, { useNewUrlParser: true, useUnifiedTopology: true });
 const { connection } = mongoose;
 

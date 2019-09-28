@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { copyLinkAddress } from '../../helpers';
 
 // Styles
 import './styles.css';
@@ -9,45 +10,31 @@ import VoteDiagram from '../VoteDiagram';
 import Poll from '../Poll';
 
 const UserStory = ({
-  userStoryId, userStoryDescr, pollId,
-  isVoted,
+  userStoryId, userStoryName, poll, votes,
 }) => {
-  function copyLinkAddress(e) {
-    const currentLink = e.target;
-    const textArea = document.createElement('textarea');
-    const copiedElem = document.createElement('span');
-
-    e.preventDefault();
-
-    textArea.innerHTML = currentLink.href;
-    document.body.appendChild(textArea);
-    textArea.focus();
-    textArea.select();
-    document.execCommand('copy');
-    document.body.removeChild(textArea);
-
-    currentLink.appendChild(copiedElem);
-    copiedElem.classList.add('copied-elem');
-    copiedElem.innerHTML = 'Copied';
-
-    setTimeout(() => {
-      currentLink.removeChild(copiedElem);
-    }, 2000);
-  }
-
-  const isVotedClass = isVoted ? '--voted' : '';
+  // const isVotedClass = vote ? '--voted' : '';
+  const isVotedClass = '--voted';
+  /*
+  useEffect(() => {
+    loadPoll(userStoryId);
+  }, []);
+  */
 
   return (
     <div className={`user-story ${isVotedClass}`}>
-      <p className="user-story__description">{userStoryDescr}</p>
+      <p className="user-story__description">{userStoryName}</p>
 
       {
-        pollId
-          ? <Poll pollId={pollId} />
-          : <button type="button" className="user-story__create-poll-button">Create a poll</button>
+        poll
+          ? <button type="button" className="user-story__create-poll-button">Create a poll</button>
+          : <Poll pollId={poll.pollId} />
       }
 
-      {isVoted ? <VoteDiagram pollId={pollId} /> : null}
+      {
+        votes.length
+          ? <VoteDiagram pollId={poll.pollId} />
+          : null
+      }
 
       <a href={`/${userStoryId}`} className="user-story__copy-link" onClick={(e) => copyLinkAddress(e)}>
         Copy User Story link to the clipboard
@@ -58,15 +45,17 @@ const UserStory = ({
 };
 
 UserStory.propTypes = {
+  userStoryName: PropTypes.string.isRequired,
   userStoryId: PropTypes.number.isRequired,
-  userStoryDescr: PropTypes.string.isRequired,
-  pollId: PropTypes.number,
-  isVoted: PropTypes.bool,
+  votes: PropTypes.arrayOf(PropTypes.any),
+  // poll: PropTypes.objectOf(PropTypes.any),
+  poll: PropTypes.objectOf(PropTypes.any),
+  // loadPoll: PropTypes.func.isRequired,
 };
 
 UserStory.defaultProps = {
-  pollId: null,
-  isVoted: false,
+  votes: [],
+  poll: {},
 };
 
 export default UserStory;

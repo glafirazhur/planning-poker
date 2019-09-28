@@ -1,41 +1,75 @@
 const initialState = {
-  pollValues: [0, 0.5, 1, 2, 3, 5, 8, 13],
   userStories: [
     {
       userStoryId: 1,
-      userStoryDescr: 'As a user I want to add polls to the User story',
-      pollId: 1,
-      isVoted: false,
+      userStoryName: 'As a user I want to add polls to the User story',
+      user: 1,
     },
     {
       userStoryId: 2,
-      userStoryDescr: 'As a user I want to add polls to the User story',
-      pollId: 2,
-      isVoted: false,
+      userStoryName: 'As a user I want to add polls to the User story',
     },
     {
       userStoryId: 3,
-      userStoryDescr: 'As a user I want to add polls to the User story',
-      pollId: null,
-      isVoted: false,
+      userStoryName: 'As a user I want to add polls to the User story',
+      user: 1,
     },
     {
       userStoryId: 4,
-      userStoryDescr: 'As a user I want to add polls to the User story',
-      pollId: 5,
-      isVoted: false,
+      userStoryName: 'As a user I want to add polls to the User story',
+      user: 1,
     },
     {
       userStoryId: 5,
-      userStoryDescr: 'As a user I want to add polls to the User story',
-      pollId: null,
-      isVoted: false,
+      userStoryName: 'As a user I want to add polls to the User story',
+      user: 1,
     },
     {
       userStoryId: 6,
-      userStoryDescr: 'As a user I want to add polls to the User story',
-      pollId: null,
-      isVoted: false,
+      userStoryName: 'As a user I want to add polls to the User story',
+      user: 1,
+    },
+  ],
+  polls: [
+    {
+      pollId: 1,
+      user: 1,
+      userStory: 1,
+    },
+    {
+      pollId: 2,
+      user: 1,
+      userStory: 5,
+    },
+    {
+      pollId: 3,
+      user: 1,
+      userStory: 2,
+    },
+    {
+      pollId: 4,
+      user: 1,
+      userStory: 3,
+    },
+  ],
+  votes: [
+    {
+      voteId: 1,
+      user: 1,
+      poll: 1,
+      voteValue: 1,
+    },
+    {
+      voteId: 2,
+      user: 1,
+      poll: 2,
+      voteValue: 1,
+    },
+    {
+      voteId: 3,
+      user: 1,
+      poll: 3,
+      voteValue: 1,
     },
   ],
 };

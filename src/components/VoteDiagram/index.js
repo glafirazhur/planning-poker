@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import './styles.css';
 
 const VoteDiagram = ({ pollId }) => (
-  <div className="vote-diagram">{`Voted ${pollId}`}</div>
+  <div className="vote-diagram">{`Voted diagram ${pollId}`}</div>
 );
 
 VoteDiagram.propTypes = {

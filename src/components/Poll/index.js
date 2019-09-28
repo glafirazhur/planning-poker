@@ -5,9 +5,7 @@ import PropTypes from 'prop-types';
 import './styles.css';
 
 // Data
-import initialState from '../../Redux/initialState';
-
-const { pollValues } = initialState;
+import pollValues from '../../appSettings';
 
 const Poll = ({ pollId, selectedValue }) => {
   const [currentValue, setCurrentValue] = useState(selectedValue);

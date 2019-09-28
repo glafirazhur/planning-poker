@@ -1,5 +1,6 @@
-import React from 'react';
-// import PropTypes from 'prop-types';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 // Styles
 import './styles.css';
@@ -8,31 +9,48 @@ import './styles.css';
 import UserStory from '../UserStory';
 import Filter from '../Filter';
 
-// Data
-import initialState from '../../Redux/initialState';
+// Redux
+import { loadUserStoriesAction } from '../../Redux/actions/userStoriesActions';
 
-const { userStories } = initialState;
 
-const App = () => (
-  <div className="main-wrap">
-    <header>
-      <h1>Planning poker</h1>
-    </header>
+const App = ({ userStories, getUserStories }) => {
+  useEffect(() => {
+    getUserStories();
+  }, []);
 
-    <Filter />
+  return (
+    <div className="main-wrap">
+      <header>
+        <h1>Planning poker</h1>
+      </header>
 
-    <div className="user-stories-wrap">
-      { userStories.map((userStory) => (
-        <UserStory
-          key={userStory.userStoryId}
-          userStoryId={userStory.userStoryId}
-          userStoryDescr={userStory.userStoryDescr}
-          pollId={userStory.pollId}
-          isVoted={userStory.isVoted}
-        />
-      )) }
+      <Filter />
+
+      <div className="user-stories-wrap">
+        { userStories.map((userStory) => (
+          <UserStory
+            key={userStory.userStoryId}
+            userStoryId={userStory.userStoryId}
+            userStoryName={userStory.userStoryName}
+          />
+        )) }
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
-export default App;
+App.propTypes = {
+  userStories: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.any)),
+  getUserStories: PropTypes.func.isRequired,
+};
+
+App.defaultProps = {
+  userStories: [],
+};
+
+const mapStateToProps = (state) => ({ userStories: state.userStories });
+const mapDispatchToProps = (dispatch) => ({
+  getUserStories: () => dispatch(loadUserStoriesAction()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
