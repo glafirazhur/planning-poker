@@ -20,8 +20,3 @@ export const copyLinkAddress = (e) => {
     currentLink.removeChild(copiedElem);
   }, 2000);
 };
-
-export const objectIsEmpty = (obj) => {
-  console.log(obj);
-  return Object.keys(obj).length === 0 && obj.constructor === Object;
-};

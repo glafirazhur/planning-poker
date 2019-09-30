@@ -2,3 +2,26 @@
   display: flex;
   flex-wrap: wrap;
 }
+
+.poll__vote-value {
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap;
+}
+
+.poll__vote-label {
+  display: inline-block;
+  padding: 5px 10px;
+}
+
+.poll__vote-value:focus + .poll__vote-label {
+  color: red;
+}
+
+.--selected + .poll__vote-label {
+  color: blue;
+}
