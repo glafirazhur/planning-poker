@@ -32,7 +32,8 @@ const UserStory = ({
       }
       {
         poll.pollId
-          ? <Poll pollId={poll.pollId} voteId={userVote[0] ? userVote[0].voteId : null} />
+          // eslint-disable-next-line no-underscore-dangle
+          ? <Poll pollId={poll.pollId} voteId={userVote[0] ? userVote[0]._id : null} />
           : <button type="button" className="user-story__create-poll-button">Create a poll</button>
       }
 

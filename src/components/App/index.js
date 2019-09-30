@@ -12,15 +12,15 @@ import UserStory from '../UserStory';
 // Redux
 import { loadUserStoriesAction } from '../../Redux/actions/userStoriesActions';
 import { loadPollsAction } from '../../Redux/actions/pollActions';
-import { loadVotesAction } from '../../Redux/actions/votesActoins';
+import { loadVotesThunk } from '../../Redux/actions/votesActoins';
 
 const App = ({
-  userStories, polls, votes, currentUser, getUserStories, getPolls, getVotes,
+  userStories, polls, votes, currentUser, getUserStories, getPolls, fetchVotes,
 }) => {
   useEffect(() => {
     getUserStories();
     getPolls();
-    getVotes();
+    fetchVotes();
   }, []);
 
   return (
@@ -56,7 +56,7 @@ App.propTypes = {
   currentUser: PropTypes.number.isRequired,
   getUserStories: PropTypes.func.isRequired,
   getPolls: PropTypes.func.isRequired,
-  getVotes: PropTypes.func.isRequired,
+  fetchVotes: PropTypes.func.isRequired,
 };
 
 App.defaultProps = {
@@ -75,7 +75,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   getUserStories: () => dispatch(loadUserStoriesAction()),
   getPolls: () => dispatch(loadPollsAction()),
-  getVotes: () => dispatch(loadVotesAction()),
+  fetchVotes: () => dispatch(loadVotesThunk()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

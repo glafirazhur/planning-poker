@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 // Redux
 import { connect } from 'react-redux';
-import { updateVoteAction, addVoteAction } from '../../Redux/actions/votesActoins';
+import { updateVoteThunk, addVoteThunk } from '../../Redux/actions/votesActoins';
 
 // Styles
 import './styles.css';
@@ -14,7 +14,8 @@ import pollValues from '../../appSettings';
 const Poll = ({
   pollId, voteId, currentUser, votes, updateVote, addVote,
 }) => {
-  const currentVote = votes.filter((voteItem) => voteItem.voteId === voteId);
+  // eslint-disable-next-line no-underscore-dangle
+  const currentVote = votes.filter((voteItem) => voteItem._id === voteId);
   const initVoteValue = currentVote[0] ? currentVote[0].voteValue : null;
   const [selectedOption, setSelectedOption] = useState(initVoteValue);
   const [currentVoteId, setCurrentVoteId] = useState(voteId);
@@ -25,9 +26,10 @@ const Poll = ({
     if (currentVoteId) {
       updateVote(currentVoteId, voteValue);
     } else {
-      let newVoteId = Math.max(...votes.map((vote) => vote.voteId), 0);
+      // eslint-disable-next-line no-underscore-dangle
+      let newVoteId = Math.max(...votes.map((vote) => vote._id), 0);
       newVoteId += 1;
-      addVote(newVoteId, currentUser, pollId, voteValue);
+      addVote(currentUser, pollId, voteValue);
       setCurrentVoteId(newVoteId);
     }
   };
@@ -62,7 +64,7 @@ const Poll = ({
 Poll.propTypes = {
   pollId: PropTypes.number.isRequired,
   // currentOption: PropTypes.number,
-  voteId: PropTypes.number,
+  voteId: PropTypes.string,
   votes: PropTypes.arrayOf(PropTypes.any).isRequired,
   currentUser: PropTypes.number.isRequired,
   updateVote: PropTypes.func.isRequired,
@@ -74,15 +76,16 @@ Poll.defaultProps = {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  updateVote: (voteId, voteValue) => dispatch(updateVoteAction(voteId, voteValue)),
+  updateVote: (voteId, voteValue) => dispatch(updateVoteThunk(voteId, voteValue)),
   addVote:
-    (voteId, currentUser, pollId, voteValue) => (
-      dispatch(addVoteAction(voteId, currentUser, pollId, voteValue))
-    ),
+    (currentUser, pollId, voteValue) => {
+      dispatch(addVoteThunk(currentUser, pollId, voteValue));
+    },
 });
 
 const mapStateToProps = (state) => ({
   currentUser: state.currentUser,
   votes: state.votes,
 });
+
 export default connect(mapStateToProps, mapDispatchToProps)(Poll);

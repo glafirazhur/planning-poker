@@ -1,13 +1,13 @@
 import { ADD_VOTE, LOAD_VOTES, UPDATE_VOTE } from '../actionTypes';
-import initialState from '../initialState';
 
-const votesReducer = (state = initialState.votes, action) => {
+const votesReducer = (state = [], action) => {
   switch (action.type) {
     case LOAD_VOTES:
-      return state;
+      return [...action.payload];
     case UPDATE_VOTE:
       return state.map((item) => {
-        if (item.voteId === action.payload.voteId) {
+        // eslint-disable-next-line no-underscore-dangle
+        if (item._id === action.payload.voteId) {
           return {
             ...item,
             voteValue: action.payload.voteValue,
