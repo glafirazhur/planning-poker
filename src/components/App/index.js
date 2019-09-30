@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 // Styles
+import '../../index.css';
 import './styles.css';
 
 // Components
 import UserStory from '../UserStory';
-import Filter from '../Filter';
 
 // Redux
 import { loadUserStoriesAction } from '../../Redux/actions/userStoriesActions';
@@ -24,12 +24,11 @@ const App = ({
   }, []);
 
   return (
-    <div className="main-wrap">
-      <header>
+    <main className="main-content">
+      <header className="main-header">
         <h1>Planning poker</h1>
+        <span className="header__current-user">{`Current user: ${currentUser}`}</span>
       </header>
-
-      <Filter />
 
       <div className="user-stories-wrap">
         { userStories.map((userStory) => {
@@ -46,7 +45,7 @@ const App = ({
           );
         }) }
       </div>
-    </div>
+    </main>
   );
 };
 

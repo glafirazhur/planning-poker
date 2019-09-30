@@ -1,6 +1,7 @@
 .poll {
   display: flex;
   flex-wrap: wrap;
+  padding: 20px 0;
 }
 
 .poll__vote-value {
@@ -15,13 +16,46 @@
 
 .poll__vote-label {
   display: inline-block;
-  padding: 5px 10px;
+  padding: 10px 10px;
+  width: 20px;
+  text-align: center;
+  border: 1px solid dodgerblue;
+  border-radius: 5px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: cornflowerblue;
+  transition: background-color 0.1s, color 0.1s;
 }
 
+.poll__vote-label:hover {
+  background-color: rgba(30, 144, 255, 0.4);
+  color: #ffffff;
+}
+
+.--selected + .poll__vote-label,
 .poll__vote-value:focus + .poll__vote-label {
-  color: red;
+  color: white;
+  background-color: dodgerblue;
 }
 
-.--selected + .poll__vote-label {
-  color: blue;
+.poll__submit-vote {
+  display: block;
+  appearance: none;
+  background: none;
+  color: cornflowerblue;
+  width: 100%;
+  border: 1px solid dodgerblue;
+  border-radius: 5px;
+  padding: 10px;
+  transition: background-color 0.1s, color 0.1s;
+}
+
+.poll__submit-vote:hover {
+  background-color: dodgerblue;
+  color: #ffffff;
+}
+
+.poll__submit-vote:active {
+  background-color: #1f7bd4;
 }

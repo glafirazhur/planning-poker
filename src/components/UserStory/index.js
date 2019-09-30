@@ -24,7 +24,7 @@ const UserStory = ({
 
   return (
     <div className={`user-story ${isVotedClass}`}>
-      <p className="user-story__description">{userStoryName}</p>
+      <header className="user-story__description">{userStoryName}</header>
       {
         poll.pollId
           ? <VoteDiagram pollId={poll.pollId} />
@@ -36,9 +36,11 @@ const UserStory = ({
           : <button type="button" className="user-story__create-poll-button">Create a poll</button>
       }
 
-      <a href={`/${userStoryId}`} className="user-story__copy-link" onClick={(e) => copyLinkAddress(e)}>
-        Copy User Story link to the clipboard
-      </a>
+      <footer>
+        <a href={`/${userStoryId}`} className="user-story__copy-link" onClick={(e) => copyLinkAddress(e)}>
+          Copy User Story link to the clipboard
+        </a>
+      </footer>
     </div>
   );
 };

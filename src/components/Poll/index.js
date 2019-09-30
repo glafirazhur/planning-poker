@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 // Redux
@@ -32,6 +32,11 @@ const Poll = ({
     }
   };
 
+  useEffect(() => {
+    setCurrentVoteId(voteId);
+    setSelectedOption(initVoteValue);
+  }, [votes]);
+
   return (
     <form onSubmit={(e) => submitPoll(e)} className="poll" id={`vote-form-${pollId}`}>
       {pollValues.map((pollValue) => (
@@ -49,7 +54,7 @@ const Poll = ({
           <label htmlFor={`poll${pollId}-value${pollValue}`} className="poll__vote-label">{pollValue}</label>
         </div>
       ))}
-      <button type="submit">Save vote</button>
+      <button type="submit" className="poll__submit-vote">Save vote</button>
     </form>
   );
 };

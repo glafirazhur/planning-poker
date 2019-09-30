@@ -1,21 +1,45 @@
 .user-story {
-  border: 1px solid rgba(120, 120, 120, 0.3);
+  border: 1px solid dodgerblue;
   border-radius: 10px;
-  padding: 20px;
+  padding: 20px 30px;
   display: flex;
   flex-direction: column;
+  align-self: start;
 }
 
 .user-story__description {
-  font-size: 20px;
+  font-size: 18px;
   margin: 0;
-  padding: 20px;
+  padding: 20px 0;
 }
 
 .user-story__copy-link {
-  display: inline-block;
+  display: block;
   position: relative;
   color: dodgerblue;
+  text-align: center;
+}
+
+.user-story__create-poll-button {
+  display: block;
+  appearance: none;
+  background: none;
+  color: cornflowerblue;
+  width: 100%;
+  border: 1px solid dodgerblue;
+  border-radius: 5px;
+  padding: 10px;
+  transition: background-color 0.1s, color 0.1s;
+  margin-bottom: 20px;
+}
+
+.user-story__create-poll-button:hover {
+  background-color: dodgerblue;
+  color: #ffffff;
+}
+
+.user-story__create-poll-button:active {
+  background-color: #1f7bd4;
 }
 
 .copied-elem {
@@ -28,5 +52,5 @@
 }
 
 .--voted {
-  border-color: cornflowerblue;
+  border: 1px solid rgba(120, 120, 120, 0.3);
 }
